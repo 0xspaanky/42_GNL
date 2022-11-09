@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smounafi <smounafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/06 23:56:03 by smounafi          #+#    #+#             */
-/*   Updated: 2022/11/10 00:11:11 by smounafi         ###   ########.fr       */
+/*   Created: 2022/11/09 23:55:07 by smounafi          #+#    #+#             */
+/*   Updated: 2022/11/10 00:12:49 by smounafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_readfile(int fd, char *static_stocker)
 {
@@ -99,30 +99,16 @@ char	*ft_nextline(char *static_stocker)
 
 char	*get_next_line(int fd)
 {
-	static char	*static_stocker;
+	static char	*static_stocker[OPEN_MAX];
 	char		*line;
 
 	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	static_stocker = ft_readfile(fd, static_stocker);
-	if (!static_stocker)
+	static_stocker[fd] = ft_readfile(fd, static_stocker[fd]);
+	if (!static_stocker[fd])
 		return (NULL);
-	line = ft_line(static_stocker);
-	static_stocker = ft_nextline(static_stocker);
+	line = ft_line(static_stocker[fd]);
+	static_stocker[fd] = ft_nextline(static_stocker[fd]);
 	return (line);
 }
-
-// int main()
-// {
-//     int fd;
-// 	char *res = NULL;
-
-// 	fd = open("test.txt", O_RDONLY);
-// 	res = get_next_line(fd);
-// 	printf("%s",res);
-// 	res = get_next_line(fd);
-// 	printf("%s",res);
-// 	res = get_next_line(fd);
-// 	printf("%s",res);
-// }
