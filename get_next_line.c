@@ -6,7 +6,7 @@
 /*   By: smounafi <smounafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 23:56:03 by smounafi          #+#    #+#             */
-/*   Updated: 2022/11/09 12:04:38 by smounafi         ###   ########.fr       */
+/*   Updated: 2022/11/09 22:23:36 by smounafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char *ft_readfile(int fd, char *static_stocker)
 	if(!static_stocker)
 		static_stocker = ft_calloc(1,1);
 	n_readed = 1;
-	readed_line = (char *)malloc((BUFFER_SIZE + 1) * (sizeof(char)));
+	readed_line = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if(!readed_line)
 		return (NULL);
 	while(!ft_strchr(static_stocker,'\n') && n_readed != 0)
@@ -47,7 +47,7 @@ char *ft_line(char *static_stocker)
 	int i;
 
 	i = 0;
-	if(!static_stocker)
+	if(!static_stocker[i])
 		return (NULL);
 	while(static_stocker[i] && static_stocker[i] != '\n')
 		i++;
@@ -114,15 +114,17 @@ char *get_next_line(int fd)
 	return line;
 }
 
-// int main()
-// {
-//     int fd;
-// 	char *res = NULL;
-// 	int i = 0;
+int main()
+{
+    int fd;
+	char *res = NULL;
+	int i = 0;
 	
-// 	fd = open("test.txt", O_RDONLY);
-// 	res = get_next_line(fd);
-// 	printf("%s",res);
-// 	res = get_next_line(fd);
-// 	printf("%s",res);
-// }
+	fd = open("test.txt", O_RDONLY);
+	res = get_next_line(fd);
+	printf("%s",res);
+	res = get_next_line(fd);
+	printf("%s",res);
+	res = get_next_line(fd);
+	printf("%s",res);
+}
