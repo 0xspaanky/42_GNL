@@ -6,7 +6,7 @@
 /*   By: smounafi <smounafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 23:55:57 by smounafi          #+#    #+#             */
-/*   Updated: 2022/11/09 02:49:57 by smounafi         ###   ########.fr       */
+/*   Updated: 2022/11/09 07:46:29 by smounafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_strlen(const char *s)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (s[i] != '\0')
@@ -59,7 +59,7 @@ void	*ft_calloc(size_t count, size_t size)
 	size_t	i;
 
 	i = 0;
-	if (count && size == SIZE_MAX / count)
+	if (count && size > SIZE_MAX / count)
 		return (0);
 	ptr = (char *)malloc(count * size);
 	if (!ptr)
