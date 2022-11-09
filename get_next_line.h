@@ -6,14 +6,14 @@
 /*   By: smounafi <smounafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 23:56:21 by smounafi          #+#    #+#             */
-/*   Updated: 2022/11/09 07:30:03 by smounafi         ###   ########.fr       */
+/*   Updated: 2022/11/09 12:02:43 by smounafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 50
+# define BUFFER_SIZE 5
 #endif
 
 #include <fcntl.h>
