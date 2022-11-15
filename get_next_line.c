@@ -6,7 +6,7 @@
 /*   By: smounafi <smounafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 23:56:03 by smounafi          #+#    #+#             */
-/*   Updated: 2022/11/10 00:11:11 by smounafi         ###   ########.fr       */
+/*   Updated: 2022/11/14 15:26:23 by smounafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ char	*ft_readfile(int fd, char *static_stocker)
 	int		n_readed;
 
 	if (!static_stocker)
-		static_stocker = ft_calloc(1, 1);
+		static_stocker = alloc_me(1, 1);
 	n_readed = 1;
 	readed_line = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!readed_line)
 		return (NULL);
-	while (!ft_strchr(static_stocker, '\n') && n_readed != 0)
+	while (!find_me(static_stocker, '\n') && n_readed != 0)
 	{
 		n_readed = read(fd, readed_line, BUFFER_SIZE);
 		if (n_readed == -1)
@@ -33,7 +33,7 @@ char	*ft_readfile(int fd, char *static_stocker)
 			return (NULL);
 		}
 		readed_line[n_readed] = '\0';
-		static_stocker = ft_strjoin(static_stocker, readed_line);
+		static_stocker = join_both(static_stocker, readed_line);
 		if (!static_stocker)
 			return (NULL);
 	}
@@ -83,7 +83,7 @@ char	*ft_nextline(char *static_stocker)
 		free(static_stocker);
 		return (NULL);
 	}
-	line = malloc(sizeof(char) * (ft_strlen(static_stocker) - i + 1));
+	line = malloc(sizeof(char) * (my_len(static_stocker) - i + 1));
 	if (!line)
 		return (NULL);
 	j = 0;
@@ -112,17 +112,3 @@ char	*get_next_line(int fd)
 	static_stocker = ft_nextline(static_stocker);
 	return (line);
 }
-
-// int main()
-// {
-//     int fd;
-// 	char *res = NULL;
-
-// 	fd = open("test.txt", O_RDONLY);
-// 	res = get_next_line(fd);
-// 	printf("%s",res);
-// 	res = get_next_line(fd);
-// 	printf("%s",res);
-// 	res = get_next_line(fd);
-// 	printf("%s",res);
-// }

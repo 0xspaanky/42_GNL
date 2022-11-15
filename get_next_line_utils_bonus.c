@@ -6,13 +6,13 @@
 /*   By: smounafi <smounafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 23:56:17 by smounafi          #+#    #+#             */
-/*   Updated: 2022/11/10 00:14:04 by smounafi         ###   ########.fr       */
+/*   Updated: 2022/11/10 02:22:41 by smounafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-size_t	ft_strlen(const char *s)
+size_t	my_len(const char *s)
 {
 	int	i;
 
@@ -24,7 +24,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*join_both(char *s1, char *s2)
 {
 	size_t	i;
 	size_t	j;
@@ -32,7 +32,7 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	if (!s1 || !s2)
 		return (NULL);
-	dst = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	dst = (char *)malloc(my_len(s1) + my_len(s2) + 1);
 	i = 0;
 	if (!dst)
 		return (NULL);
@@ -44,7 +44,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	j = 0;
 	while (s2[j])
 	{
-		dst[ft_strlen(s1) + j] = s2[j];
+		dst[my_len(s1) + j] = s2[j];
 		j++;
 	}
 	dst[i + j] = '\0';
@@ -52,7 +52,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (dst);
 }
 
-void	*ft_calloc(size_t count, size_t size)
+void	*alloc_me(size_t count, size_t size)
 {
 	char	*ptr;
 	size_t	i;
@@ -71,7 +71,7 @@ void	*ft_calloc(size_t count, size_t size)
 	return (ptr);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*find_me(const char *s, int c)
 {
 	int	i;
 

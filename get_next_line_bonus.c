@@ -6,7 +6,7 @@
 /*   By: smounafi <smounafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 23:55:07 by smounafi          #+#    #+#             */
-/*   Updated: 2022/11/10 00:12:49 by smounafi         ###   ########.fr       */
+/*   Updated: 2022/11/14 15:46:08 by smounafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ char	*ft_readfile(int fd, char *static_stocker)
 	int		n_readed;
 
 	if (!static_stocker)
-		static_stocker = ft_calloc(1, 1);
+		static_stocker = alloc_me(1, 1);
 	n_readed = 1;
 	readed_line = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!readed_line)
 		return (NULL);
-	while (!ft_strchr(static_stocker, '\n') && n_readed != 0)
+	while (!find_me(static_stocker, '\n') && n_readed != 0)
 	{
 		n_readed = read(fd, readed_line, BUFFER_SIZE);
 		if (n_readed == -1)
@@ -33,7 +33,7 @@ char	*ft_readfile(int fd, char *static_stocker)
 			return (NULL);
 		}
 		readed_line[n_readed] = '\0';
-		static_stocker = ft_strjoin(static_stocker, readed_line);
+		static_stocker = join_both(static_stocker, readed_line);
 		if (!static_stocker)
 			return (NULL);
 	}
@@ -83,7 +83,7 @@ char	*ft_nextline(char *static_stocker)
 		free(static_stocker);
 		return (NULL);
 	}
-	line = malloc(sizeof(char) * (ft_strlen(static_stocker) - i + 1));
+	line = malloc(sizeof(char) * (my_len(static_stocker) - i + 1));
 	if (!line)
 		return (NULL);
 	j = 0;
@@ -103,7 +103,7 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	line = NULL;
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= OPEN_MAX)
 		return (NULL);
 	static_stocker[fd] = ft_readfile(fd, static_stocker[fd]);
 	if (!static_stocker[fd])
